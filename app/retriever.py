@@ -1,7 +1,7 @@
 # retriever.py
 
 import numpy as np
-from embedding import get_embedding
+from .embedding import get_embedding
 
 
 def retrieve_documents(query, k, index, documents, doc_names):

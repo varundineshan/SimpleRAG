@@ -1,11 +1,11 @@
 # main.py
 
-from config import DOCUMENTS_FOLDER_PATH
-from doc_reader import load_documents
-from embedding import generate_document_embeddings
-from indexer import create_faiss_index
-from retriever import retrieve_documents
-from generator import generate_answer
+from app.config import DOCUMENTS_FOLDER_PATH
+from app.doc_reader import load_documents
+from app.embedding import generate_document_embeddings
+from app.indexer import create_faiss_index
+from app.retriever import retrieve_documents
+from app.generator import generate_answer
 from dotenv import load_dotenv
 import os
 # Load environment variables from .env file

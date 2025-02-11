@@ -2,7 +2,7 @@
 
 from openai import AzureOpenAI
 from dotenv import load_dotenv
-from config import GENERATIVE_MODEL
+from .config import GENERATIVE_MODEL
 import os
 load_dotenv()
 # Create a client for embedding calls (using a fixed API version)
