@@ -1,8 +1,7 @@
 # config.py
 
 # Azure OpenAI configuration for embeddings and generation
-AZURE_ENDPOINT = ""
-AZURE_SUBSCRIPTION_KEY = ""
+
 
 # Models to use
 EMBEDDING_MODEL = "text-embedding-ada-002"
