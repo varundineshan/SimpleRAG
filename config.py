@@ -1,8 +1,5 @@
 # config.py
 
-# Azure OpenAI configuration for embeddings and generation
-
-
 # Models to use
 EMBEDDING_MODEL = "text-embedding-ada-002"
 GENERATIVE_MODEL = "gpt-4"
