@@ -2,18 +2,24 @@
 
 from config import DOCUMENTS_FOLDER_PATH
 from doc_reader import load_documents
-#from embedding import generate_document_embeddings
+from embedding import generate_document_embeddings
 #from indexer import create_faiss_index
 #from retriever import retrieve_documents
 #from generator import generate_answer
-
-
+from dotenv import load_dotenv
+import os
+# Load environment variables from .env file
+load_dotenv()
+# Access the secrets
+subscription_key = os.getenv("AZURE_SUBSCRIPTION_KEY")
+endpoint = os.getenv("AZURE_ENDPOINT")
 def main():
     # Load documents and their names from the folder
     documents, doc_names = load_documents(DOCUMENTS_FOLDER_PATH)
 
     # Generate embeddings for the loaded documents
-    #document_embeddings = generate_document_embeddings(documents)
+    document_embeddings = generate_document_embeddings(documents)
+    print(document_embeddings)
 
     # Create a FAISS index from the embeddings
     #index = create_faiss_index(document_embeddings)
