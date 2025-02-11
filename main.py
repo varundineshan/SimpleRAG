@@ -3,9 +3,9 @@
 from config import DOCUMENTS_FOLDER_PATH
 from doc_reader import load_documents
 from embedding import generate_document_embeddings
-#from indexer import create_faiss_index
-#from retriever import retrieve_documents
-#from generator import generate_answer
+from indexer import create_faiss_index
+from retriever import retrieve_documents
+from generator import generate_answer
 from dotenv import load_dotenv
 import os
 # Load environment variables from .env file
@@ -19,10 +19,10 @@ def main():
 
     # Generate embeddings for the loaded documents
     document_embeddings = generate_document_embeddings(documents)
-    print(document_embeddings)
+
 
     # Create a FAISS index from the embeddings
-    #index = create_faiss_index(document_embeddings)
+    index = create_faiss_index(document_embeddings)
 
     # Define the user query
     user_query = (
@@ -31,23 +31,23 @@ def main():
     )
 
     # Retrieve the top relevant documents (using all documents in this case)
-    '''retrieved_context = retrieve_documents(
+    retrieved_context = retrieve_documents(
         query=user_query,
         k=len(documents),
         index=index,
         documents=documents,
         doc_names=doc_names
-    )'''
+    )
 
     # Generate an answer using the retrieved context
-    #answer = generate_answer(user_query, retrieved_context)
+    answer = generate_answer(user_query, retrieved_context)
 
     print("Answer:")
-    #print(answer)
+    print(answer)
 
     print("\nReferenced Documents:")
-    #for doc in retrieved_context:
-        #print(doc["doc_name"])
+    for doc in retrieved_context:
+        print(doc["doc_name"])
 
 
 if __name__ == "__main__":
