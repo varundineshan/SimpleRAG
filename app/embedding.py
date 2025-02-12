@@ -9,10 +9,7 @@ load_dotenv("app/.env")
 # Create a client for embedding calls (using a fixed API version)
 subscription_key = os.getenv("AZURE_SUBSCRIPTION_KEY")
 endpoint = os.getenv("AZURE_ENDPOINT")
-print("hello")
-print("Current working directory:", os.getcwd())
-print("subscription_key",subscription_key)
-print(endpoint)
+
 client = AzureOpenAI(
     azure_endpoint=endpoint,
     api_key=subscription_key,

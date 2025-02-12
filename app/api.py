@@ -77,28 +77,38 @@ class QueryResponse(BaseModel):
 # -------------------------------------------------------------------
 @app.post("/query", response_model=QueryResponse)
 def query_rag(data: QueryRequest):
-    print("Received query:", data.query)
+
     try:
         user_query = data.query
-        # Retrieve documents based on the query using your actual function.
         retrieved_context = retrieve_documents(
             query=user_query,
-            k=len(documents),
+            k=len(documents),  # Retrieve relevant documents
             index=index,
             documents=documents,
             doc_names=doc_names
         )
-        print("Retrieved context:", retrieved_context)
-        # Generate an answer using your actual answer generation function.
+
+        # If no relevant documents are found, return a message
+        if not retrieved_context:
+            return QueryResponse(
+                answer="The information you are looking for is not present in the documents.",
+                referenced_docs=[]
+            )
+
+
+
+        # Generate an answer using the retrieved documents
         answer = generate_answer(user_query, retrieved_context)
-        print("Generated answer:", answer)
-        # Extract document names to return in the response.
+
+
+        # Extract document names for reference
         referenced_docs = [doc["doc_name"] for doc in retrieved_context]
+
         return QueryResponse(answer=answer, referenced_docs=referenced_docs)
+
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
-
 # -------------------------------------------------------------------
 # Run the app when executing this file directly.
 # -------------------------------------------------------------------
