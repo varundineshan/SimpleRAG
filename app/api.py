@@ -27,6 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Absolute path to the "static" folder.
 STATIC_DIR = BASE_DIR / "static"
+DOC_DIR= BASE_DIR / "Documents"
 if not STATIC_DIR.exists():
     raise RuntimeError(f"Static directory '{STATIC_DIR}' does not exist")
 
@@ -46,6 +47,7 @@ app.add_middleware(
 
 # Optionally, mount additional static files (e.g., for CSS, images) at "/static".
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+app.mount("/Documents", StaticFiles(directory=str(DOC_DIR)), name="static")
 
 # Define a GET endpoint for "/" that returns index.html.
 @app.get("/")
@@ -57,7 +59,7 @@ def read_index():
 # Initialize your documents and build the FAISS index.
 # -------------------------------------------------------------------
 # Replace DOCUMENTS_FOLDER_PATH with your actual documents folder if needed.
-DOCUMENTS_FOLDER_PATH = str(BASE_DIR / "documents")  # Change as needed.
+DOCUMENTS_FOLDER_PATH = DOC_DIR # Change as needed.
 documents, doc_names = load_documents(DOCUMENTS_FOLDER_PATH)
 document_embeddings = generate_document_embeddings(documents)
 index = create_faiss_index(document_embeddings)
